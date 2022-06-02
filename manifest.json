@@ -1,0 +1,17 @@
+{
+    "name": "Getting Started Example",
+    "description": "Build an Extension!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+      "storage",
+      "scripting"
+    ],
+    "content_scripts" : [
+      {"matches":["*://*.infotech.pcsh.ntpc.edu.tw/*"],
+        "js":["content.js"]}
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }
