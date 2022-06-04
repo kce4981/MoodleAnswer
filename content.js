@@ -10,6 +10,7 @@ if (isReview()) {
 if (isAttemp()) {
     let cmid = detectURL()[1];
     getData(cmid).then((val) => {
+        console.log(val);
         if (val != undefined) fillAns(val);
     })
 }
@@ -72,11 +73,18 @@ function stripAns() {
 }
 
 function fillAns(Answers) {
-    var inputs = document.getElementsByClassName("form-control mb-1");
+    var inputs = document.querySelectorAll('.form-control,.select');
 
     for (let i = 0; i < Answers.length; i++) {
         let ans = Answers[i];
-        let input = inputs[i];
-        input.defaultValue = ans;
+        let AnsBox = inputs[i];
+        if (AnsBox.nodeName == 'INPUT') {
+            AnsBox.defaultValue = ans;
+        }
+        else if (AnsBox.nodeName == 'SELECT') {
+            var val;
+            AnsBox.childNodes.forEach(element => {if (element.textContent == ans) val = element.value;});
+            AnsBox.value = val;
+        }
     }
 }
